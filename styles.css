@@ -102,3 +102,72 @@ main {
 .modal-body {
     padding: 30px;
 }
+progress-container {
+    margin-top: 28px;
+    width: 100%;
+}
+
+.progress-track {
+    position: relative;
+    width: 100%;
+    height: 44px;
+    background-color: #aaaaaa;
+    overflow: hidden;
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.progress-fill {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 0%;
+    background-color: #e32119;
+    transition: width 0.05s linear;
+}
+
+.progress-labels {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+}
+
+.label-black,
+.label-white {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: inherit;
+    font-weight: bold;
+    font-size: 1.1rem;
+    letter-spacing: 0.5px;
+    background: transparent;
+}
+
+.label-black {
+    color: #000000;
+}
+
+.label-white {
+    color: #ffffff;
+    clip-path: inset(0 100% 0 0);
+    transition: clip-path 0.05s linear;
+}
+
+.progress-note {
+    font-size: 0.7rem;
+    color: #777;
+    text-align: center;
+    margin-top: 8px;
+}
