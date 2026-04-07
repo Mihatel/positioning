@@ -10,46 +10,46 @@ const openBtn = document.getElementById('openModalBtn');
 const modalOverlay = document.getElementById('modalOverlay');
 const closeBtn = document.getElementById('closeModalBtn');
 
-const progressFill = document.getElementById('progressFill');
-const whiteLabel = document.getElementById('labelWhite');
+const progressFill = document.querySelector('.progress-fill');
+const whiteLabel = document.querySelector('.label-white');
+let animationFrameId = null;
+let startTime = null;
 
-let progressInterval = null;      // идентификатор интервала
-let currentPercent = 0;
-
-
-function updateProgressBar(percent) {
+function setProgressPercent(percent) {
     const safePercent = Math.min(100, Math.max(0, percent));
-    currentPercent = safePercent;
-
     progressFill.style.width = safePercent + '%';
-
-    const clipValue = `inset(0 ${100 - safePercent}% 0 0)`;
-    whiteLabel.style.clipPath = clipValue;
+    whiteLabel.style.clipPath = `inset(0 ${100 - safePercent}% 0 0)`;
 }
 
-function resetProgressAndStop() {
-    if (progressInterval) {
-        clearInterval(progressInterval);
-        progressInterval = null;
+function resetProgress() {
+    if (animationFrameId) {
+        cancelAnimationFrame(animationFrameId);
+        animationFrameId = null;
     }
-    updateProgressBar(0);
+    startTime = null;
+    setProgressPercent(0);
+}
+
+function animateProgress(timestamp) {
+    if (!startTime) startTime = timestamp;
+    const elapsed = timestamp - startTime;
+    const duration = 3000; // 3 секунды
+    let percent = (elapsed / duration) * 100;
+
+    if (elapsed >= duration) {
+        setProgressPercent(100);
+        animationFrameId = null;
+        startTime = null;
+        return;
+    }
+
+    setProgressPercent(percent);
+    animationFrameId = requestAnimationFrame(animateProgress);
 }
 
 function startProgressAnimation() {
-    resetProgressAndStop();
-
-    let percent = 0;
-    updateProgressBar(0);
-
-    progressInterval = setInterval(() => {
-        if (percent >= 100) {
-            clearInterval(progressInterval);
-            progressInterval = null;
-            return;
-        }
-        percent++;
-        updateProgressBar(percent);
-    }, 30);
+    resetProgress();
+    animationFrameId = requestAnimationFrame(animateProgress);
 }
 
 function openModal() {
@@ -59,7 +59,7 @@ function openModal() {
 
 function closeModal() {
     modalOverlay.classList.remove('active');
-    resetProgressAndStop();
+    resetProgress();
 }
 
 openBtn.addEventListener('click', openModal);
