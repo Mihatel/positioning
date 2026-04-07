@@ -6,7 +6,39 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!--Верстать тут-->
-    <script src="index.js"></script>
+<main>
+    <section class="logos-container">
+        <!-- Логотип 1 -->
+        <figure class="logo-item">
+            <div class="logo-square">
+                <img src="designs/logo1.png" alt="Логотип 1" class="logo-img">
+            </div>
+        </figure>
+
+        <!-- Логотип 2 -->
+        <figure class="logo-item">
+            <div class="logo-square">
+                <img src="designs/logo2.png" alt="Логотип 2" class="logo-img">
+            </div>
+        </figure>
+    </section>
+
+    <section class="button-wrapper">
+        <button class="open-btn" id="openModalBtn">Открыть модальное окно</button>
+    </section>
+</main>
+
+<aside class="modal-overlay" id="modalOverlay">
+    <section class="modal">
+        <button class="modal-close" id="closeModalBtn">&times;</button>
+        <article class="modal-body">
+            <h2>Заголовок модального окна</h2>
+            <p>Это пример модального окна. Здесь может быть любой контент.</p>
+            <p>Ширина окна фиксированная, высота подстраивается под содержимое.</p>
+        </article>
+    </section>
+</aside>
+    
+<script src="index.js"></script>
 </body>
 </html>
