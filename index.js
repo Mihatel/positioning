@@ -33,7 +33,7 @@ function resetProgress() {
 function animateProgress(timestamp) {
     if (!startTime) startTime = timestamp;
     const elapsed = timestamp - startTime;
-    const duration = 3000; // 3 секунды
+    const duration = 3000;
     let percent = (elapsed / duration) * 100;
 
     if (elapsed >= duration) {
